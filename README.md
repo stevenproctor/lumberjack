@@ -18,22 +18,33 @@ definition to your `pom.xml`:
 
 With Leiningen:
 
-    [lumberjack "0.1.0"]
-
+``` clj
+[lumberjack "0.1.0"]
+```
 
 With Maven:
 
-    <dependency>
-      <groupId>lumberjack</groupId>
-      <artifactId>lumberjack</artifactId>
-      <version>0.1.0</version>
-    </dependency>
+``` xml
+<dependency>
+  <groupId>lumberjack</groupId>
+  <artifactId>lumberjack</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
 
 ## Usage
 
 To view a simple time series graph of the number of hits by the minute:
 
+``` clj
+=> (use 'lumberjack.core)
+=> (use 'lumberjack.nginx)
+=> (use 'lumberjack.visualization)
+``` 
+
+``` clj
 (view-time-series (nginx-logs ["test/lumberjack/nginx_sample.log"]) :by timestamp-minute :grouping-name "minute")
+``` 
 
 ## License
 
