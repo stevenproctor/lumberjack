@@ -2,6 +2,18 @@
 
 A Clojure library designed to help with your log lines.  Currently creates a log entry structure for Nginx logs, and allows for some basic visualization of time series data.
 
+## Dependencies 
+
+
+* [Clojure](http://clojure.org/)
+* [clj-time](https://github.com/seancorfield/clj-time)
+* [Incanter](http://incanter.org/)
+
+### Dev Dependencies
+
+* [midje](https://github.com/marick/Midje) - Unit tests
+
+
 ## Artifacts
 
 Lumberjack artifacts are [released to Clojars](https://clojars.org/lumberjack). If you are using Maven, add the following repository
