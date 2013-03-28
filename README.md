@@ -55,8 +55,21 @@ To view a simple time series graph of the number of hits by the minute:
 ``` 
 
 ``` clj
-(view-time-series (nginx-logs ["test/lumberjack/nginx_sample.log"]) :by timestamp-minute :grouping-name "minute")
+(view-time-series (nginx-logs [path-to-nginx-log file]) :by timestamp-minute :grouping-name "minute")
 ``` 
+
+Doing the above will give you a graph that looks like the following.
+
+![time series by timestamp minute](img/view-time-series-by-timestamp-minute.png)
+
+For very large log files you may need to update the project.clj file to
+include a setting for the allowed memory size via:
+
+``` clj
+ :jvm-opts ["-Xmx768M"]
+```
+
+and adjust the 768M to an appropriate number of megabytes.
 
 ## License
 
