@@ -49,4 +49,4 @@
   (fact "We can parse loglines from a single file"
     (count (process-logfile "test/lumberjack/nginx_sample.log")) => 4)
   (fact "We can parse loglines from multiple files"
-    (count (nginx-log-entries-from ["test/lumberjack/nginx_sample.log" "test/lumberjack/nginx_sample.log"])) => 8))
+    (count (nginx-logs ["test/lumberjack/nginx_sample.log" "test/lumberjack/nginx_sample.log"])) => 8))
