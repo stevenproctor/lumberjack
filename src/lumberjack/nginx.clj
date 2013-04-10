@@ -6,12 +6,9 @@
 ;:referrer :user-agent
 
 (defn parse-line [line]
-  (let [parsed-line {}
-        pattern #"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})? - - \[(.*)\] \"(\w+) ([^\"]*)\" (\d{3}) (\d+) \"([^\"]*)\".*"
+  (let [pattern #"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})? - - \[(.*)\] \"(\w+) ([^\"]*)\" (\d{3}) (\d+) \"([^\"]*)\".*"
         match (re-find pattern line)]
-    (reduce (fn [memo [idx part]]
-                (assoc memo part (nth match idx)))
-            parsed-line (map-indexed vector parts))))
+    (apply hash-map (interleave parts match))))
 
 (defn parse-lines [lines]
   (map parse-line lines))
