@@ -4,9 +4,9 @@
   (:use midje.sweet
         lumberjack.core))
 
-(def timestamp "21/Apr/2013:15:20:10 -0500")
+(def timestamp "21/Apr/2013:15:47:10 -0500")
 (def timestamp-same-hour "21/Apr/2013:15:59:59 -0500")
-(def timestamp-as-datetime (time/date-time 2013 04 21 20 20 10))
+(def timestamp-as-datetime (time/date-time 2013 04 21 20 47 10))
 
 (fact "Can parse a date string into a DateTime"
   (parse-datetime timestamp) => timestamp-as-datetime)
@@ -16,6 +16,14 @@
                                                         :timestamp-in-millis (coerce/to-long timestamp-as-datetime)})
 
 (facts "Can get the timestamp to a resolution"
+  (fact "Can get the timestamp to the millisecond"
+    (timestamp-millis {:timestamp timestamp}) => (coerce/to-long (time/date-time 2013 04 21 20 47 10 000)))
+  (fact "Can get the timestamp to the second"
+    (timestamp-second {:timestamp timestamp}) => (coerce/to-long (time/date-time 2013 04 21 20 47 10)))
+  (fact "Can get the timestamp to the minute"
+    (timestamp-minute {:timestamp timestamp}) => (coerce/to-long (time/date-time 2013 04 21 20 47)))
+  (fact "Can get the timestamp to the 15-minute mark"
+    (timestamp-15-minutes {:timestamp timestamp}) => (coerce/to-long (time/date-time 2013 04 21 20 45)))
   (fact "Can get the timestamp to the hour"
     (timestamp-hour {:timestamp timestamp}) => (coerce/to-long (time/date-time 2013 04 21 20))))
 

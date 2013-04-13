@@ -15,7 +15,7 @@
 (defn with-timestamp-in-millis [record]
   (assoc record :timestamp-in-millis (timestamp-in-millis record)))
 
-(def resolutions
+(def timestamp-resolutions
    {:millis 1
     :second 1000
     :minute (* 1000 60)
@@ -23,11 +23,20 @@
     :hour (* 1000 60 60)})
 
 (defn timestamp-to-resolution [record resolution]
-  (let [r (resolution resolutions)]
+  (let [r (resolution timestamp-resolutions)]
     (* r (quot (timestamp-in-millis record) r))))
+
+(defn timestamp-millis [record]
+  (timestamp-to-resolution record :millis))
+
+(defn timestamp-second [record]
+  (timestamp-to-resolution record :second))
 
 (defn timestamp-minute [record]
   (timestamp-to-resolution record :minute))
+
+(defn timestamp-15-minutes [record]
+  (timestamp-to-resolution record :15-minutes))
 
 (defn timestamp-hour [record]
   (timestamp-to-resolution record :hour))
