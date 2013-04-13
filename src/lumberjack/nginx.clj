@@ -3,11 +3,11 @@
             [clojure.string :as string]))
 
 (def parts [:original :ip :timestamp :request-method :request-uri :status-code :response-size :referrer])
-;:referrer :user-agent
+
+(def log-line-pattern #"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})? - - \[(.*)\] \"(\w+) ([^\"]*)\" (\d{3}) (\d+) \"([^\"]*)\".*")
 
 (defn parse-line [line]
-  (let [pattern #"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})? - - \[(.*)\] \"(\w+) ([^\"]*)\" (\d{3}) (\d+) \"([^\"]*)\".*"
-        match (re-find pattern line)]
+  (let [match (re-find log-line-pattern line)]
     (apply hash-map (interleave parts match))))
 
 (defn parse-lines [lines]
